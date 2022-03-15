@@ -1,0 +1,727 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище FUNModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ID_Speciality" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Speciality" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="SchollYear" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumberOfStudents" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HourlyLoad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
+          <Property Name="Lection" Type="int" />
+          <Property Name="Practice" Type="int" />
+          <Property Name="LabWork" Type="int" />
+          <Property Name="CourseWork" Type="int" />
+          <Property Name="Consultation" Type="int" />
+          <Property Name="Exam" Type="int" />
+          <Property Name="Summ" Type="int" Nullable="false" />
+          <Property Name="Offset" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID_discipline" Type="int" Nullable="false" />
+          <Property Name="ID_teacher" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_hourlyLoad" Type="int" Nullable="false" />
+          <Property Name="ID_teacher" Type="int" Nullable="false" />
+          <Property Name="ID_specialty" Type="int" Nullable="false" />
+          <Property Name="ID_group" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Load_Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hourly_Load" Type="int" Nullable="false" />
+          <Property Name="ID_teacher" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Staffing" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teacher_Discipline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_discipline" Type="int" Nullable="false" />
+          <Property Name="ID_teacher" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Log" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Pass" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Role" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Discipline_Speciality1">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Discipline">
+              <PropertyRef Name="ID_Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Speciality1">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="ID_Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourlyLoad_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="HourlyLoad" Type="Self.HourlyLoad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HourlyLoad">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_HourlyLoad">
+          <End Role="HourlyLoad" Type="Self.HourlyLoad" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HourlyLoad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_hourlyLoad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Speciality">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_specialty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Teacher_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Load_Teacher" Type="Self.Load_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load_Teacher">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Discipline_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Teacher_Discipline" Type="Self.Teacher_Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Discipline">
+              <PropertyRef Name="ID_discipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Discipline_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher_Discipline" Type="Self.Teacher_Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Discipline">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FUNModelContainer">
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HourlyLoad" EntityType="Self.HourlyLoad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Load" EntityType="Self.Load" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Load_Teacher" EntityType="Self.Load_Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher_Discipline" EntityType="Self.Teacher_Discipline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Discipline_Speciality1" Association="Self.FK_Discipline_Speciality1">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Discipline" EntitySet="Discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Speciality1" Association="Self.FK_Group_Speciality1">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourlyLoad_Teacher" Association="Self.FK_HourlyLoad_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="HourlyLoad" EntitySet="HourlyLoad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Group" Association="Self.FK_Load_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_HourlyLoad" Association="Self.FK_Load_HourlyLoad">
+            <End Role="HourlyLoad" EntitySet="HourlyLoad" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Speciality" Association="Self.FK_Load_Speciality">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Teacher" Association="Self.FK_Load_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Teacher_Teacher" Association="Self.FK_Load_Teacher_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Load_Teacher" EntitySet="Load_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Discipline_Discipline" Association="Self.FK_Teacher_Discipline_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Teacher_Discipline" EntitySet="Teacher_Discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Discipline_Teacher" Association="Self.FK_Teacher_Discipline_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teacher_Discipline" EntitySet="Teacher_Discipline" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FUNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Discipline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_Speciality" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Speciality" Relationship="Self.FK_Discipline_Speciality1" FromRole="Discipline" ToRole="Speciality" />
+          <NavigationProperty Name="Teacher_Discipline" Relationship="Self.FK_Teacher_Discipline_Discipline" FromRole="Discipline" ToRole="Teacher_Discipline" />
+          <NavigationProperty Name="HourlyLoad" Relationship="FUNModel.FK_HourlyLoad_Discipline" FromRole="Discipline" ToRole="HourlyLoad" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Speciality" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="SchollYear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfStudents" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Speciality" Relationship="Self.FK_Group_Speciality1" FromRole="Group" ToRole="Speciality" />
+          <NavigationProperty Name="Load" Relationship="FUNModel.FK_Load_Group" FromRole="Group" ToRole="Load" />
+        </EntityType>
+        <EntityType Name="Load_Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hourly_Load" Type="Int32" Nullable="false" />
+          <Property Name="ID_teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Load_Teacher_Teacher" FromRole="Load_Teacher" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Speciality">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Discipline" Relationship="Self.FK_Discipline_Speciality1" FromRole="Speciality" ToRole="Discipline" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Group_Speciality1" FromRole="Speciality" ToRole="Group" />
+          <NavigationProperty Name="Load" Relationship="FUNModel.FK_Load_Speciality" FromRole="Speciality" ToRole="Load" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Staffing" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Education" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Load_Teacher" Relationship="Self.FK_Load_Teacher_Teacher" FromRole="Teacher" ToRole="Load_Teacher" />
+          <NavigationProperty Name="Teacher_Discipline" Relationship="Self.FK_Teacher_Discipline_Teacher" FromRole="Teacher" ToRole="Teacher_Discipline" />
+          <NavigationProperty Name="Load" Relationship="FUNModel.FK_Load_Teacher" FromRole="Teacher" ToRole="Load" />
+          <NavigationProperty Name="HourlyLoad" Relationship="FUNModel.FK_HourlyLoad_Teacher" FromRole="Teacher" ToRole="HourlyLoad" />
+        </EntityType>
+        <EntityType Name="Teacher_Discipline">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_discipline" Type="Int32" Nullable="false" />
+          <Property Name="ID_teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discipline" Relationship="Self.FK_Teacher_Discipline_Discipline" FromRole="Teacher_Discipline" ToRole="Discipline" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Teacher_Discipline_Teacher" FromRole="Teacher_Discipline" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_Discipline_Speciality1">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Discipline">
+              <PropertyRef Name="ID_Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Discipline_Discipline">
+          <End Role="Discipline" Type="Self.Discipline" Multiplicity="1" />
+          <End Role="Teacher_Discipline" Type="Self.Teacher_Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Discipline">
+              <PropertyRef Name="ID_discipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Speciality1">
+          <End Role="Speciality" Type="Self.Speciality" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="ID_Speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Teacher_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Load_Teacher" Type="Self.Load_Teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load_Teacher">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Discipline_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Teacher_Discipline" Type="Self.Teacher_Discipline" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Teacher_Discipline">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBModel" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Discipline" EntityType="Self.Discipline" />
+          <EntitySet Name="Group" EntityType="Self.Group" />
+          <EntitySet Name="Load_Teacher" EntityType="Self.Load_Teacher" />
+          <EntitySet Name="Speciality" EntityType="Self.Speciality" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="Teacher_Discipline" EntityType="Self.Teacher_Discipline" />
+          <AssociationSet Name="FK_Discipline_Speciality1" Association="Self.FK_Discipline_Speciality1">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Discipline" EntitySet="Discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Discipline_Discipline" Association="Self.FK_Teacher_Discipline_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="Teacher_Discipline" EntitySet="Teacher_Discipline" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Speciality1" Association="Self.FK_Group_Speciality1">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Teacher_Teacher" Association="Self.FK_Load_Teacher_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Load_Teacher" EntitySet="Load_Teacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Discipline_Teacher" Association="Self.FK_Teacher_Discipline_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Teacher_Discipline" EntitySet="Teacher_Discipline" />
+          </AssociationSet>
+          <EntitySet Name="Load" EntityType="FUNModel.Load" />
+          <AssociationSet Name="FK_Load_Group" Association="FUNModel.FK_Load_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Speciality" Association="FUNModel.FK_Load_Speciality">
+            <End Role="Speciality" EntitySet="Speciality" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_Teacher" Association="FUNModel.FK_Load_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <EntitySet Name="HourlyLoad" EntityType="FUNModel.HourlyLoad" />
+          <AssociationSet Name="FK_HourlyLoad_Discipline" Association="FUNModel.FK_HourlyLoad_Discipline">
+            <End Role="Discipline" EntitySet="Discipline" />
+            <End Role="HourlyLoad" EntitySet="HourlyLoad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Load_HourlyLoad" Association="FUNModel.FK_Load_HourlyLoad">
+            <End Role="HourlyLoad" EntitySet="HourlyLoad" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourlyLoad_Teacher" Association="FUNModel.FK_HourlyLoad_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="HourlyLoad" EntitySet="HourlyLoad" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="FUNModel.Users" />
+        </EntityContainer>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ID_hourlyLoad" Type="Int32" Nullable="false" />
+          <Property Name="ID_teacher" Type="Int32" Nullable="false" />
+          <Property Name="ID_specialty" Type="Int32" Nullable="false" />
+          <Property Name="ID_group" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Group" Relationship="FUNModel.FK_Load_Group" FromRole="Load" ToRole="Group" />
+          <NavigationProperty Name="Speciality" Relationship="FUNModel.FK_Load_Speciality" FromRole="Load" ToRole="Speciality" />
+          <NavigationProperty Name="Teacher" Relationship="FUNModel.FK_Load_Teacher" FromRole="Load" ToRole="Teacher" />
+          <NavigationProperty Name="HourlyLoad" Relationship="FUNModel.FK_Load_HourlyLoad" FromRole="Load" ToRole="HourlyLoad" />
+        </EntityType>
+        <Association Name="FK_Load_Group">
+          <End Type="FUNModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="FUNModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Speciality">
+          <End Type="FUNModel.Speciality" Role="Speciality" Multiplicity="1" />
+          <End Type="FUNModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Speciality">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_specialty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_Teacher">
+          <End Type="FUNModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="FUNModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HourlyLoad">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
+          <Property Name="Lection" Type="Int32" />
+          <Property Name="Practice" Type="Int32" />
+          <Property Name="LabWork" Type="Int32" />
+          <Property Name="CourseWork" Type="Int32" />
+          <Property Name="Consultation" Type="Int32" />
+          <Property Name="Exam" Type="Int32" />
+          <Property Name="Summ" Type="Int32" Nullable="false" />
+          <Property Name="Offset" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ID_discipline" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discipline" Relationship="FUNModel.FK_HourlyLoad_Discipline" FromRole="HourlyLoad" ToRole="Discipline" />
+          <NavigationProperty Name="Load" Relationship="FUNModel.FK_Load_HourlyLoad" FromRole="HourlyLoad" ToRole="Load" />
+          <Property Name="ID_teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="FUNModel.FK_HourlyLoad_Teacher" FromRole="HourlyLoad" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_HourlyLoad_Discipline">
+          <End Type="FUNModel.Discipline" Role="Discipline" Multiplicity="1" />
+          <End Type="FUNModel.HourlyLoad" Role="HourlyLoad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discipline">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HourlyLoad">
+              <PropertyRef Name="ID_discipline" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Load_HourlyLoad">
+          <End Type="FUNModel.HourlyLoad" Role="HourlyLoad" Multiplicity="1" />
+          <End Type="FUNModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HourlyLoad">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ID_hourlyLoad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourlyLoad_Teacher">
+          <End Type="FUNModel.Teacher" Role="Teacher" Multiplicity="1" />
+          <End Type="FUNModel.HourlyLoad" Role="HourlyLoad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HourlyLoad">
+              <PropertyRef Name="ID_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Log" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Pass" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FUNModelContainer" CdmEntityContainer="DBModel">
+          <EntitySetMapping Name="Discipline">
+            <EntityTypeMapping TypeName="FUNModel.Discipline">
+              <MappingFragment StoreEntitySet="Discipline">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID_Speciality" ColumnName="ID_Speciality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="FUNModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Speciality" ColumnName="ID_Speciality" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="SchollYear" ColumnName="SchollYear" />
+                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Load_Teacher">
+            <EntityTypeMapping TypeName="FUNModel.Load_Teacher">
+              <MappingFragment StoreEntitySet="Load_Teacher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Hourly_Load" ColumnName="Hourly_Load" />
+                <ScalarProperty Name="ID_teacher" ColumnName="ID_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Speciality">
+            <EntityTypeMapping TypeName="FUNModel.Speciality">
+              <MappingFragment StoreEntitySet="Speciality">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FUNModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="FUNModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Staffing" ColumnName="Staffing" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher_Discipline">
+            <EntityTypeMapping TypeName="FUNModel.Teacher_Discipline">
+              <MappingFragment StoreEntitySet="Teacher_Discipline">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_discipline" ColumnName="ID_discipline" />
+                <ScalarProperty Name="ID_teacher" ColumnName="ID_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Load">
+            <EntityTypeMapping TypeName="FUNModel.Load">
+              <MappingFragment StoreEntitySet="Load">
+                <ScalarProperty Name="ID_group" ColumnName="ID_group" />
+                <ScalarProperty Name="ID_specialty" ColumnName="ID_specialty" />
+                <ScalarProperty Name="ID_teacher" ColumnName="ID_teacher" />
+                <ScalarProperty Name="ID_hourlyLoad" ColumnName="ID_hourlyLoad" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HourlyLoad">
+            <EntityTypeMapping TypeName="FUNModel.HourlyLoad">
+              <MappingFragment StoreEntitySet="HourlyLoad">
+                <ScalarProperty Name="ID_teacher" ColumnName="ID_teacher" />
+                <ScalarProperty Name="ID_discipline" ColumnName="ID_discipline" />
+                <ScalarProperty Name="Offset" ColumnName="Offset" />
+                <ScalarProperty Name="Summ" ColumnName="Summ" />
+                <ScalarProperty Name="Exam" ColumnName="Exam" />
+                <ScalarProperty Name="Consultation" ColumnName="Consultation" />
+                <ScalarProperty Name="CourseWork" ColumnName="CourseWork" />
+                <ScalarProperty Name="LabWork" ColumnName="LabWork" />
+                <ScalarProperty Name="Practice" ColumnName="Practice" />
+                <ScalarProperty Name="Lection" ColumnName="Lection" />
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FUNModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+                <ScalarProperty Name="Log" ColumnName="Log" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

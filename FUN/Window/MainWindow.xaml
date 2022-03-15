@@ -13,17 +13,16 @@
         </Grid.RowDefinitions>
         <Menu x:Name="MainMenu" Grid.Row="0">
             <MenuItem Header="Файл">
-                <MenuItem Header="Закрыть программу"></MenuItem>
+                <MenuItem Header="Закрыть программу" Click="MenuItem_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Данные">
                 <MenuItem x:Name="MainDate" Header="Добавить" Click="MainDate_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="Нагрузка">
-                <MenuItem Header="Добавить" Click="MenuItem_Click"></MenuItem>
-                <MenuItem Header="Редактировать"></MenuItem>
-                <MenuItem Header="Удалить"></MenuItem>
+                <MenuItem Header="Просмотреть" Click="MenuItem_Click_1"></MenuItem>
             </MenuItem>
         </Menu>
         <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" ContentRendered="MainFrame_ContentRendered"></Frame>
     </Grid>
+    
 </Window>

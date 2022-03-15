@@ -33,17 +33,24 @@ namespace FUN
 
         private void Window_Closed(object sender, EventArgs e)
         {
-
+            System.Windows.Application.Current.Shutdown();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Navigate(new Pages.LoadTeachers());
-        }
 
         private void MainFrame_ContentRendered(object sender, EventArgs e)
         {
 
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.DataPage());
+        }
+
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
