@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7030ea0232c142bc9f0cbc7f80145149" Name="Diagram1">
+        <EntityTypeShape EntityType="FUNModel.Discipline" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.Group" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.Load_Teacher" Width="1.5" PointX="8.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.Speciality" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.Teacher" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FUNModel.Teacher_Discipline" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="FUNModel.FK_Discipline_Speciality1" ManuallyRouted="false" />
+        <AssociationConnector Association="FUNModel.FK_Teacher_Discipline_Discipline" ManuallyRouted="false" />
+        <AssociationConnector Association="FUNModel.FK_Group_Speciality1" ManuallyRouted="false" />
+        <AssociationConnector Association="FUNModel.FK_Load_Teacher_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="FUNModel.FK_Teacher_Discipline_Teacher" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FUNModel.Load" Width="1.5" PointX="11.25" PointY="4.25" />
+        <AssociationConnector Association="FUNModel.FK_Load_Group" />
+        <AssociationConnector Association="FUNModel.FK_Load_Speciality" />
+        <AssociationConnector Association="FUNModel.FK_Load_Teacher" />
+        <EntityTypeShape EntityType="FUNModel.HourlyLoad" Width="1.5" PointX="5.25" PointY="11.125" />
+        <AssociationConnector Association="FUNModel.FK_HourlyLoad_Discipline" />
+        <AssociationConnector Association="FUNModel.FK_Load_HourlyLoad" />
+        <AssociationConnector Association="FUNModel.FK_HourlyLoad_Teacher" />
+        <EntityTypeShape EntityType="FUNModel.Users" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
