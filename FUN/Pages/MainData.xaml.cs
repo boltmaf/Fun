@@ -41,7 +41,9 @@ namespace FUN.Pages
 
         }
 
-
+        /// <summary>
+        /// Обновление специальностей
+        /// </summary>
         private void RefreshCbSpezialization()
         {
             CbSpecCode.Items.Clear();
@@ -54,7 +56,9 @@ namespace FUN.Pages
                 CbSpesGroup.Items.Add(u);
             }
         }
-
+        /// <summary>
+        /// Обновление дисциплин
+        /// </summary>
         private void RefreshCbDiscipline()
         {
             CbDisciplineName.Items.Clear();
@@ -65,6 +69,9 @@ namespace FUN.Pages
                 CbDisLoad.Items.Add(u);
             }
         }
+        /// <summary>
+        /// Обновление групп
+        /// </summary>
         private void RefreshGroup()
         {
             CbGroupNumber.Items.Clear();
@@ -74,6 +81,9 @@ namespace FUN.Pages
             }
         }
 
+        /// <summary>
+        /// Обновление преподавателей
+        /// </summary>
         private void RefreshTeacher()
         {
             CbTeacherName.Items.Clear();
@@ -117,24 +127,12 @@ namespace FUN.Pages
             TbSumm.Text = Convert.ToString(i);
         }
 
-        private void BtAddGroup_Click(object sender, RoutedEventArgs e)
-        {
-            Group group = new Group() { Number = Convert.ToInt32(TbGrNumber.Text), ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID , SchollYear = TbGrYear.Text, NumberOfStudents = Convert.ToInt32(TbGrStud.Text)};
-            _db.GetContext().Group.Add(group);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили группу для специальности! " + group.Speciality.Name);
-            RefreshGroup();
-        }
 
-        private void BtAddTeacher_Click(object sender, RoutedEventArgs e)
-        {
-            Teacher teacher = new Teacher() { Name = TbTeacherName.Text, Education = TbTeacherEducation.Text };
-            _db.GetContext().Teacher.Add(teacher);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили преподавателя!");
-            RefreshTeacher();
-        }
-
+        /// <summary>
+        /// Открытие окна для добавления данных о дисциплине
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddDis_Click(object sender, RoutedEventArgs e)
         {
             Window.AddDisciplineWindow addDiscipline = new Window.AddDisciplineWindow();
@@ -144,7 +142,11 @@ namespace FUN.Pages
             RefreshGroup();
             RefreshTeacher();
         }
-
+        /// <summary>
+        /// Сохранение данных о дисциплине
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnSaveDis_Click(object sender, RoutedEventArgs e)
         {
             Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
@@ -158,7 +160,11 @@ namespace FUN.Pages
             MessageBox.Show("Успешно сохранено!");
             RefreshCbDiscipline();
         }
-
+        /// <summary>
+        /// Изменение параметров в зависимости от Combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CbDisciplineName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CbDisciplineName.SelectedItem != null)
@@ -173,12 +179,138 @@ namespace FUN.Pages
                 TbDisYear.Text = Convert.ToString(discipline.Year);
             }
         }
-
+        /// <summary>
+        /// Удаление дисциплины
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnDeleteDis_Click(object sender, RoutedEventArgs e)
         {
             Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
             _db.GetContext().Discipline.Remove(discipline);
             _db.GetContext().SaveChanges();
+            RefreshCbDiscipline();
+        }
+        /// <summary>
+        /// Переход на окно с добавлением группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Window.AddGroupWindow addGroup = new Window.AddGroupWindow();
+            addGroup.ShowDialog();
+            RefreshCbSpezialization();
+            RefreshCbDiscipline();
+            RefreshGroup();
+            RefreshTeacher();
+        }
+        /// <summary>
+        /// Удаление группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDeleteGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+            _db.GetContext().Group.Remove(group);
+            _db.GetContext().SaveChanges();
+            RefreshGroup();
+        }
+
+        /// <summary>
+        /// Редактирование данных о группе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEditGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+            group.Number = Convert.ToInt32(TbGrNumber.Text);
+            group.ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID;
+            group.SchollYear = TbGrYear.Text;
+            group.NumberOfStudents = Convert.ToInt32(TbGrStud.Text);
+            _db.GetContext().SaveChanges();
+            MessageBox.Show("Успешно сохранено!");
+            RefreshGroup();
+        }
+        /// <summary>
+        /// Изменение параметров в зависимости от Combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CbGroupNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CbGroupNumber.SelectedItem != null)
+            {
+
+                Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+                TbGrID.Text = Convert.ToString(group.ID);
+                TbGrNumber.Text = Convert.ToString(group.Number);
+                CbSpesGroup.SelectedItem = _db.GetContext().Speciality.FirstOrDefault(p => p.ID == group.ID_Speciality);
+                TbGrYear.Text = group.SchollYear;
+                TbGrStud.Text = Convert.ToString(group.NumberOfStudents);
+            }
+        }
+
+        /// <summary>
+        /// Открытие окна для добавления преподавателя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            Window.AddTeacherWindow addTeacher = new Window.AddTeacherWindow();
+            addTeacher.ShowDialog();
+            RefreshCbSpezialization();
+            RefreshCbDiscipline();
+            RefreshGroup();
+            RefreshTeacher();
+        }
+
+        /// <summary>
+        /// Удаление преподавателя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnDeleteTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
+
+            _db.GetContext().Teacher.Remove(teacher);
+            _db.GetContext().SaveChanges();
+            RefreshTeacher();
+        }
+        /// <summary>
+        /// Редактирование данных о преподавателе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEditTeacher_Click(object sender, RoutedEventArgs e)
+        {
+            Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
+            teacher.Name = TbTeacherName.Text;
+            teacher.Education = TbTeacherEducation.Text;
+            teacher.Rate = Convert.ToDouble(TbTeacherStaffing.Text);
+            _db.GetContext().SaveChanges();
+            MessageBox.Show("Успешно сохранено!");
+            RefreshTeacher();
+        }
+        /// <summary>
+        /// Изменение параметров в зависимости от Combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CbTeacherName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CbTeacherName.SelectedItem != null)
+            {
+                Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
+                TbTeacherID.Text = Convert.ToString(teacher.ID);
+                TbTeacherName.Text = teacher.Name;
+                TbTeacherEducation.Text = teacher.Education;
+                TbTeacherStaffing.Text = Convert.ToString(teacher.Rate);
+            }
         }
     }
 }

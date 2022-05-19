@@ -39,7 +39,10 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource FirstStyle}">Специальность</TextBlock>
-                    <ComboBox IsReadOnly="false" x:Name="CbSpecCode" Grid.Row="0" Grid.Column="1" DisplayMemberPath="Code" Width="200" Height="30"></ComboBox>
+                    <UniformGrid Grid.Column="1" Columns="2" Grid.Row="0">
+                        <ComboBox IsReadOnly="false" x:Name="CbSpecCode" Grid.Row="0" Grid.Column="1" DisplayMemberPath="Code" Width="200" Height="30"></ComboBox>
+                        <Button x:Name="BtnAddSpec" Width="50" Height="30" Click="BtnAddDis_Click">+</Button>
+                    </UniformGrid>
                     <UniformGrid Rows="3" Grid.Column="0" Grid.Row="1">
                         <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Code</TextBlock>
@@ -147,23 +150,26 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource FirstStyle}">Группа</TextBlock>
-                    <ComboBox x:Name="CbGroupNumber" Grid.Row="0" Grid.Column="1" Width="200" Height="30" DisplayMemberPath="Number"></ComboBox>
+                    <UniformGrid Grid.Column="1" Columns="2" Grid.Row="0">
+                        <ComboBox x:Name="CbGroupNumber" Grid.Row="0" Grid.Column="1" Width="200" Height="30" DisplayMemberPath="Number" SelectionChanged="CbGroupNumber_SelectionChanged"></ComboBox>
+                        <Button x:Name="BtnAddGroup" Width="50" Height="30" Click="BtnAddGroup_Click">+</Button>
+                    </UniformGrid>
                     <UniformGrid Rows="5" Grid.Column="0" Grid.Row="1">
                         <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Специальность</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Номер группы</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Год поступления</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Количество студентов</TextBlock>
-
                     </UniformGrid>
                     <UniformGrid Rows="5" Grid.Row="1" Grid.Column="1">
-                        <TextBox IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
+                        <TextBox x:Name="TbGrID" IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
                         <ComboBox x:Name="CbSpesGroup" Width="200" Height="30" DisplayMemberPath="Code"></ComboBox>
                         <TextBox x:Name="TbGrNumber" Style="{StaticResource TbStyle}"></TextBox>
                         <TextBox x:Name="TbGrYear" Style="{StaticResource TbStyle}"></TextBox>
                         <TextBox x:Name="TbGrStud" Style="{StaticResource TbStyle}"></TextBox>
                     </UniformGrid>
-                    <Button x:Name="BtAddGroup" Grid.Row="3" Grid.Column="1" Click="BtAddGroup_Click"  Width="200" Height="30">Добавить</Button>
+                    <Button x:Name="BtnDeleteGroup" Grid.Row="3" Grid.Column="0" Click="BtnDeleteGroup_Click"  Width="200" Height="30">Удалить</Button>
+                    <Button x:Name="BtnEditGroup" Grid.Row="3" Grid.Column="1" Click="BtnEditGroup_Click"  Width="200" Height="30">Редактировать</Button>
                 </Grid>
                 
             </TabItem>
@@ -180,21 +186,24 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource FirstStyle}">Преподаватель</TextBlock>
-                    <ComboBox x:Name="CbTeacherName" Grid.Row="0" Grid.Column="1" Width="200" Height="30" DisplayMemberPath="Name"></ComboBox>
+                    <UniformGrid Grid.Column="1" Columns="2" Grid.Row="0">
+                        <ComboBox x:Name="CbTeacherName" Grid.Row="0" Grid.Column="1" Width="200" Height="30" DisplayMemberPath="Name" SelectionChanged="CbTeacherName_SelectionChanged"></ComboBox>
+                        <Button x:Name="BtnAddTeacher" Width="50" Height="30" Click="BtnAddTeacher_Click">+</Button>
+                    </UniformGrid>
                     <UniformGrid Rows="4" Grid.Column="0" Grid.Row="1">
                         <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">ФИО</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Занятость</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Образование</TextBlock>
-
                     </UniformGrid>
                     <UniformGrid Rows="4" Grid.Row="1" Grid.Column="1">
-                        <TextBox IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
+                        <TextBox x:Name="TbTeacherID" IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
                         <TextBox x:Name="TbTeacherName" Width="200" Height="30"></TextBox>
                         <TextBox x:Name="TbTeacherStaffing" Style="{StaticResource TbStyle}"></TextBox>
                         <TextBox x:Name="TbTeacherEducation" Style="{StaticResource TbStyle}"></TextBox>
                     </UniformGrid>
-                    <Button x:Name="BtAddTeacher" Grid.Row="3" Grid.Column="1" Click="BtAddTeacher_Click" Width="200" Height="30">Добавить</Button>
+                    <Button x:Name="BtnDeleteTeacher" Grid.Row="3" Grid.Column="0" Click="BtnDeleteTeacher_Click"  Width="200" Height="30">Удалить</Button>
+                    <Button x:Name="BtnEditTeacher" Grid.Row="3" Grid.Column="1" Click="BtnEditTeacher_Click" Width="200" Height="30">Редактировать</Button>
                 </Grid>
             </TabItem>
         </TabControl>

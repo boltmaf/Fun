@@ -64,15 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Auth.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Window\AddDisciplineWindow.xaml.cs">
       <DependentUpon>AddDisciplineWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window\AuthorizationWindow.xaml.cs">
-      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    <Compile Include="Window\AddGroupWindow.xaml.cs">
+      <DependentUpon>AddGroupWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Discipline.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
@@ -97,9 +96,6 @@
     <Compile Include="Pages\DataPage.xaml.cs">
       <DependentUpon>DataPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window\RegistrationWindow.xaml.cs">
-      <DependentUpon>RegistrationWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Speciality.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
@@ -116,7 +112,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window\AuthorizationWindow.xaml">
+    <Page Include="Window\AddGroupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window\AddTeacherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,6 +138,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FUNModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Window\AddTeacherWindow.xaml.cs">
+      <DependentUpon>AddTeacherWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -147,10 +150,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window\RegistrationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
