@@ -26,6 +26,12 @@
         <AssociationConnector Association="FUNModel.FK_Load_HourlyLoad" />
         <AssociationConnector Association="FUNModel.FK_HourlyLoad_Teacher" />
         <EntityTypeShape EntityType="FUNModel.Users" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FUNModel.LoadGroup" Width="1.5" PointX="5.25" PointY="4.5" />
+        <EntityTypeShape EntityType="FUNModel.LoadTeacher" Width="1.5" PointX="11.25" PointY="0.75" />
+        <AssociationConnector Association="FUNModel.FK_LoadGroup_Discipline" />
+        <AssociationConnector Association="FUNModel.FK_LoadGroup_Group" />
+        <AssociationConnector Association="FUNModel.FK_LoadTeacher_LoadGroup" />
+        <AssociationConnector Association="FUNModel.FK_LoadTeacher_Teacher" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

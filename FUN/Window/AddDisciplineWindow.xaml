@@ -5,25 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FUN.Window"
         mc:Ignorable="d"
-        Title="AddDisciplineWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style x:Key="FirstStyle">
-            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
-            <Setter Property="Control.FontSize" Value="16"></Setter>
-            <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-        </Style>
-        <Style x:Key="TbStyle">
-            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
-            <Setter Property="Control.FontSize" Value="16"></Setter>
-            <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.Width" Value="200"></Setter>
-            <Setter Property="Control.Height" Value="40"></Setter>
-        </Style>
-    </Window.Resources>
+        Title="AddDisciplineWindow" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>
@@ -33,8 +15,7 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <UniformGrid Rows="7" Grid.Column="0" Grid.Row="0">
-            <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
+        <UniformGrid Rows="6" Grid.Column="0" Grid.Row="0">
             <TextBlock Style="{StaticResource FirstStyle}">Название</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Специальность</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Лекции</TextBlock>
@@ -42,15 +23,14 @@
             <TextBlock Style="{StaticResource FirstStyle}">Лабораторные работы</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Год поступления</TextBlock>
         </UniformGrid>
-        <UniformGrid Rows="7" Grid.Row="0" Grid.Column="1">
-            <TextBox  IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
+        <UniformGrid Rows="6" Grid.Row="0" Grid.Column="1">
             <TextBox x:Name="TbDisName" Style="{StaticResource TbStyle}"></TextBox>
-            <ComboBox IsReadOnly="false" x:Name="CbSpecDisciplineCode" Grid.Row="0" Grid.Column="1" Width="200" Height="40" DisplayMemberPath="Code"></ComboBox>
+            <ComboBox IsReadOnly="false" x:Name="CbSpecDisciplineCode" Grid.Row="0" Grid.Column="1" Style="{StaticResource CbStyle}" DisplayMemberPath="Code"></ComboBox>
             <TextBox x:Name="TbDisLec" Style="{StaticResource TbStyle}"></TextBox>
             <TextBox x:Name="TbDisPrac" Style="{StaticResource TbStyle}"></TextBox>
             <TextBox x:Name="TbDisLr" Style="{StaticResource TbStyle}"></TextBox>
             <TextBox x:Name="TbDisYear" Style="{StaticResource TbStyle}"></TextBox>
         </UniformGrid>
-        <Button x:Name="BtnAddDis" Grid.Row="3" Grid.Column="1" Click="BtnAddDis_Click">Добавить</Button>
+        <Button x:Name="BtnAddDis" Grid.Row="3" Grid.Column="1"  Style="{StaticResource BtnStyle}" Click="BtnAddDis_Click">Добавить</Button>
     </Grid>
 </Window>

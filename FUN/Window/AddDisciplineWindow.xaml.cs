@@ -30,11 +30,11 @@ namespace FUN.Window
 
         private void BtnAddDis_Click(object sender, RoutedEventArgs e)
         {
-            if (TbDisLec.Text == null)
+            if (TbDisLec.Text == "")
                 TbDisLec.Text = "0";
-            if (TbDisPrac.Text == null)
+            if (TbDisPrac.Text == "")
                 TbDisPrac.Text = "0";
-            if (TbDisLr.Text == null)
+            if (TbDisLr.Text == "")
                 TbDisLr.Text = "0";
             Discipline discipline = new Discipline()
             {

@@ -19,6 +19,7 @@ namespace FUN
         {
             this.Teacher_Discipline = new HashSet<Teacher_Discipline>();
             this.HourlyLoad = new HashSet<HourlyLoad>();
+            this.LoadGroup = new HashSet<LoadGroup>();
         }
     
         public int ID { get; set; }
@@ -34,5 +35,7 @@ namespace FUN
         public virtual ICollection<Teacher_Discipline> Teacher_Discipline { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HourlyLoad> HourlyLoad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoadGroup> LoadGroup { get; set; }
     }
 }

@@ -5,25 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FUN.Window"
         mc:Ignorable="d"
-        Title="AddGroupWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Style x:Key="FirstStyle">
-            <Setter Property="TextBlock.TextWrapping" Value="Wrap"></Setter>
-            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
-            <Setter Property="Control.FontSize" Value="16"></Setter>
-            <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-        </Style>
-        <Style x:Key="TbStyle">
-            <Setter Property="Control.FontFamily" Value="Times New Roman"></Setter>
-            <Setter Property="Control.FontSize" Value="16"></Setter>
-            <Setter Property="Control.VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.HorizontalAlignment" Value="Center"></Setter>
-            <Setter Property="Control.Width" Value="200"></Setter>
-            <Setter Property="Control.Height" Value="40"></Setter>
-        </Style>
-    </Window.Resources>
+        Title="AddGroupWindow" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>
@@ -33,21 +15,19 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <UniformGrid Rows="5" Grid.Column="0" Grid.Row="0">
-            <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
+        <UniformGrid Rows="4" Grid.Column="0" Grid.Row="0">
             <TextBlock Style="{StaticResource FirstStyle}">Специальность</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Номер группы</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Год поступления</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Количество студентов</TextBlock>
 
         </UniformGrid>
-        <UniformGrid Rows="5" Grid.Row="0" Grid.Column="1">
-            <TextBox IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
-            <ComboBox x:Name="CbSpesGroup" Width="200" Height="30" DisplayMemberPath="Code"></ComboBox>
+        <UniformGrid Rows="4" Grid.Row="0" Grid.Column="1">
+            <ComboBox x:Name="CbSpesGroup"  Style="{StaticResource CbStyle}" DisplayMemberPath="Code"></ComboBox>
             <TextBox x:Name="TbGrNumber" Style="{StaticResource TbStyle}"></TextBox>
             <TextBox x:Name="TbGrYear" Style="{StaticResource TbStyle}"></TextBox>
             <TextBox x:Name="TbGrStud" Style="{StaticResource TbStyle}"></TextBox>
         </UniformGrid>
-        <Button x:Name="BtAddGroup" Grid.Row="23" Grid.Column="1" Click="BtAddGroup_Click"  Width="200" Height="30">Добавить</Button>
+        <Button x:Name="BtAddGroup" Grid.Row="2" Grid.Column="1" Click="BtAddGroup_Click" Style="{StaticResource BtnStyle}" >Добавить</Button>
     </Grid>
 </Window>

@@ -12,25 +12,25 @@ namespace FUN
     using System;
     using System.Collections.Generic;
     
-    public partial class Group
+    public partial class LoadGroup
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Group()
+        public LoadGroup()
         {
-            this.Load = new HashSet<Load>();
-            this.LoadGroup = new HashSet<LoadGroup>();
+            this.LoadTeacher = new HashSet<LoadTeacher>();
         }
     
         public int ID { get; set; }
-        public int ID_Speciality { get; set; }
-        public int Number { get; set; }
-        public string SchollYear { get; set; }
-        public int NumberOfStudents { get; set; }
+        public int ID_Group { get; set; }
+        public int ID_Discipline { get; set; }
+        public Nullable<int> Lections { get; set; }
+        public Nullable<int> Practice { get; set; }
+        public Nullable<int> LR { get; set; }
+        public string GroupAndDis { get; set; }
     
-        public virtual Speciality Speciality { get; set; }
+        public virtual Discipline Discipline { get; set; }
+        public virtual Group Group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Load> Load { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoadGroup> LoadGroup { get; set; }
+        public virtual ICollection<LoadTeacher> LoadTeacher { get; set; }
     }
 }
