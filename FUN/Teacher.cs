@@ -17,10 +17,6 @@ namespace FUN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Teacher()
         {
-            this.Load_Teacher = new HashSet<Load_Teacher>();
-            this.Teacher_Discipline = new HashSet<Teacher_Discipline>();
-            this.Load = new HashSet<Load>();
-            this.HourlyLoad = new HashSet<HourlyLoad>();
             this.LoadTeacher = new HashSet<LoadTeacher>();
         }
     
@@ -29,14 +25,6 @@ namespace FUN
         public string Education { get; set; }
         public double Rate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Load_Teacher> Load_Teacher { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Teacher_Discipline> Teacher_Discipline { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Load> Load { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HourlyLoad> HourlyLoad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoadTeacher> LoadTeacher { get; set; }
     }

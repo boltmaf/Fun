@@ -33,62 +33,6 @@ namespace FUN.Pages
             
         }
 
-        /*private void Class()
-        {
-            LoadGroup loadGroup = _db.GetContext().LoadGroup.First();
-            LoadTeacher loadTeacher = _db.GetContext().LoadTeacher.FirstOrDefault(p => p.ID_Load == loadGroup.ID);
-            List<Loads> loads = new List<Loads>();
-            List<LoadGroup> loadGroups;
-            Loads loads1 = new Loads();
-            loads.Add(loads1);
-            loads[0].Teachers = loadTeacher.Teacher.Name;
-            loads[0].Group = loadGroup.Group.Number;
-            loads[0].Discipline = loadGroup.Discipline.Name;
-            LoadTeacherList.ItemsSource = loads.ToList();
-            foreach(LoadGroup u in _db.GetContext().LoadGroup)
-            {
-
-            }
-        }*/
-
-        private void AddClass()
-        {
-            Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeachersName.SelectedItem).ID);
-            List<LoadTeacher> loadTeacher = new List<LoadTeacher>();
-            List<Loads> loads = new List<Loads>();
-            foreach (LoadTeacher u in _db.GetContext().LoadTeacher) 
-            {
-                if (u.ID_Teacher == teacher.ID)
-                {
-                    loadTeacher.Add(u);
-
-                }
-            }
-            for (int i = 0; i < loadTeacher.Count; i++)
-            {
-                loads.Add(new Loads()
-                {
-                    Discipline = loadTeacher[i].LoadGroup.Discipline.Name,
-                    Teachers = loadTeacher[i].Teacher.Name,
-                    Group = loadTeacher[i].LoadGroup.Group.Number,
-                    Lections = loadTeacher[i].Lections,
-                    Practice = loadTeacher[i].Practice,
-                    LR = loadTeacher[i].LR
-                });
-                /*Loads loads1 = new Loads(loadTeacher[i].LoadGroup.Discipline.Name, 
-                    loadTeacher[i].Teacher.Name, 
-                    loadTeacher[i].LoadGroup.Group.Number, 
-                    Convert.ToInt32(loadTeacher[i].Lections),
-                    Convert.ToInt32(loadTeacher[i].Practice),
-                    Convert.ToInt32(loadTeacher[i].LR));
-                loads.Add(loads1);
-            }*/
-            }
-            LoadTeacherList.ItemsSource = loads.ToList();
-            Dg.ItemsSource = null;
-            Dg.ItemsSource = LoadTeacherList.Items;
-
-        }
         /// <summary>
         /// Обновление всего
         /// </summary>
@@ -102,27 +46,16 @@ namespace FUN.Pages
             RefreshLoadTeacher();
         }
 
-        private void BtAddSpec_Click(object sender, RoutedEventArgs e)
-        {
-            Speciality speciality = new Speciality() { Code = TbSpecCode.Text, Name = TBSpecName.Text };
-            _db.GetContext().Speciality.Add(speciality);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили специальность!");
-            RefreshCbSpezialization();
-
-        }
 
         /// <summary>
         /// Обновление специальностей
         /// </summary>
         private void RefreshCbSpezialization()
         {
-            CbSpecCode.Items.Clear();
             CbSpecDisciplineCode.Items.Clear();
             CbSpesGroup.Items.Clear();
             foreach (FUN.Speciality u in _db.GetContext().Speciality)
             {
-                CbSpecCode.Items.Add(u);
                 CbSpecDisciplineCode.Items.Add(u);
                 CbSpesGroup.Items.Add(u);
             }
@@ -133,12 +66,10 @@ namespace FUN.Pages
         private void RefreshCbDiscipline()
         {
             CbDisciplineName.Items.Clear();
-            CbDisLoad.Items.Clear();
             CbLoadDiscipline.Items.Clear();
             foreach (FUN.Discipline u in _db.GetContext().Discipline)
             {
                 CbDisciplineName.Items.Add(u);
-                CbDisLoad.Items.Add(u);
                 CbLoadDiscipline.Items.Add(u);
             }
         }
@@ -187,49 +118,14 @@ namespace FUN.Pages
         private void RefreshTeacher()
         {
             CbTeacherName.Items.Clear();
-            CbTeacherLoad.Items.Clear();
             CbLoadTeacherTeacher.Items.Clear();
-            CbTeachersName.Items.Clear();
             foreach (FUN.Teacher t in _db.GetContext().Teacher)
             {
                 CbTeacherName.Items.Add(t);
-                CbTeacherLoad.Items.Add(t);
                 CbLoadTeacherTeacher.Items.Add(t);
-                CbTeachersName.Items.Add(t);
             }
         }
 
-
-        private void BtAddLoad_Click(object sender, RoutedEventArgs e)
-        {
-            HourlyLoad hourlyLoad = new HourlyLoad()
-            {
-                SemesterNumber = Convert.ToInt32(TbSemNumber.Text),
-                Lection = Convert.ToInt32(TbLection.Text),
-                Practice = Convert.ToInt32(TbPractice.Text),
-                LabWork = Convert.ToInt32(TbLR.Text),
-                CourseWork = Convert.ToInt32(TbCR.Text),
-                Consultation = Convert.ToInt32(TbConsult.Text),
-                Exam = Convert.ToInt32(TbExam.Text),
-                Summ = Convert.ToInt32(TbLection.Text) + Convert.ToInt32(TbPractice.Text) + Convert.ToInt32(TbLR.Text) + Convert.ToInt32(TbCR.Text) + Convert.ToInt32(TbConsult.Text) + Convert.ToInt32(TbExam.Text),
-                Offset = TbOffset.Text,
-                ID_discipline = ((Discipline)CbDisLoad.SelectedItem).ID
-
-            };
-
-            _db.GetContext().HourlyLoad.Add(hourlyLoad) ;
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили нагрузку для дисциплины " + hourlyLoad.Discipline.Name);
-            RefreshCbDiscipline();
-
-
-        }
-
-        private void BtRefreshSumm_Click(object sender, RoutedEventArgs e)
-        {
-            i = Convert.ToInt32(TbLection.Text) + Convert.ToInt32(TbPractice.Text) + Convert.ToInt32(TbLR.Text) + Convert.ToInt32(TbCR.Text) + Convert.ToInt32(TbConsult.Text) + Convert.ToInt32(TbExam.Text);
-            TbSumm.Text = Convert.ToString(i);
-        }
 
 
         /// <summary>
@@ -250,17 +146,24 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnSaveDis_Click(object sender, RoutedEventArgs e)
         {
-            Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
-            discipline.Name = TbDisName.Text;
-            discipline.ID_Speciality = ((Speciality)CbSpecDisciplineCode.SelectedItem).ID;
-            discipline.Lections = Convert.ToInt32(TbDisLec.Text);
-            discipline.Practice = Convert.ToInt32(TbDisPrac.Text);
-            discipline.Laboratory = Convert.ToInt32(TbDisLr.Text);
-            discipline.Year = Convert.ToInt32(TbDisYear.Text);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Успешно сохранено!");
-            RefreshCbDiscipline();
-        }
+            try
+            {
+                Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
+                discipline.Name = TbDisName.Text;
+                discipline.ID_Speciality = ((Speciality)CbSpecDisciplineCode.SelectedItem).ID;
+                discipline.Lections = Convert.ToInt32(TbDisLec.Text);
+                discipline.Practice = Convert.ToInt32(TbDisPrac.Text);
+                discipline.Laboratory = Convert.ToInt32(TbDisLr.Text);
+                discipline.Year = Convert.ToInt32(TbDisYear.Text);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Успешно сохранено!");
+                RefreshCbDiscipline();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
         /// <summary>
         /// Изменение параметров в зависимости от Combobox
         /// </summary>
@@ -268,16 +171,23 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void CbDisciplineName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbDisciplineName.SelectedItem != null)
+            try
             {
-                Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
-                TbDisID.Text = Convert.ToString(discipline.ID);
-                TbDisName.Text = discipline.Name;
-                CbSpecDisciplineCode.SelectedItem = _db.GetContext().Speciality.FirstOrDefault(p => p.ID == discipline.ID_Speciality);
-                TbDisLec.Text = Convert.ToString(discipline.Lections);
-                TbDisPrac.Text = Convert.ToString(discipline.Practice);
-                TbDisLr.Text = Convert.ToString(discipline.Laboratory);
-                TbDisYear.Text = Convert.ToString(discipline.Year);
+                if (CbDisciplineName.SelectedItem != null)
+                {
+                    Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
+                    TbDisID.Text = Convert.ToString(discipline.ID);
+                    TbDisName.Text = discipline.Name;
+                    CbSpecDisciplineCode.SelectedItem = _db.GetContext().Speciality.FirstOrDefault(p => p.ID == discipline.ID_Speciality);
+                    TbDisLec.Text = Convert.ToString(discipline.Lections);
+                    TbDisPrac.Text = Convert.ToString(discipline.Practice);
+                    TbDisLr.Text = Convert.ToString(discipline.Laboratory);
+                    TbDisYear.Text = Convert.ToString(discipline.Year);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
         /// <summary>
@@ -287,10 +197,17 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnDeleteDis_Click(object sender, RoutedEventArgs e)
         {
-            Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
-            _db.GetContext().Discipline.Remove(discipline);
-            _db.GetContext().SaveChanges();
-            RefreshCbDiscipline();
+            try
+            {
+                Discipline discipline = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == ((Discipline)CbDisciplineName.SelectedItem).ID);
+                _db.GetContext().Discipline.Remove(discipline);
+                _db.GetContext().SaveChanges();
+                RefreshCbDiscipline();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
         }
         /// <summary>
         /// Переход на окно с добавлением группы
@@ -310,11 +227,18 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnDeleteGroup_Click(object sender, RoutedEventArgs e)
         {
-            Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
-            _db.GetContext().Group.Remove(group);
-            _db.GetContext().SaveChanges();
-            RefreshGroup();
-        }
+            try
+            {
+                Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+                _db.GetContext().Group.Remove(group);
+                _db.GetContext().SaveChanges();
+                RefreshGroup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
 
         /// <summary>
         /// Редактирование данных о группе
@@ -323,14 +247,21 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnEditGroup_Click(object sender, RoutedEventArgs e)
         {
-            Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
-            group.Number = Convert.ToInt32(TbGrNumber.Text);
-            group.ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID;
-            group.SchollYear = TbGrYear.Text;
-            group.NumberOfStudents = Convert.ToInt32(TbGrStud.Text);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Успешно сохранено!");
-            RefreshGroup();
+            try
+            {
+                Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+                group.Number = Convert.ToInt32(TbGrNumber.Text);
+                group.ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID;
+                group.SchollYear = TbGrYear.Text;
+                group.NumberOfStudents = Convert.ToInt32(TbGrStud.Text);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Успешно сохранено!");
+                RefreshGroup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
         }
         /// <summary>
         /// Изменение параметров в зависимости от Combobox
@@ -339,15 +270,22 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void CbGroupNumber_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbGroupNumber.SelectedItem != null)
+            try
             {
+                if (CbGroupNumber.SelectedItem != null)
+                {
 
-                Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
-                TbGrID.Text = Convert.ToString(group.ID);
-                TbGrNumber.Text = Convert.ToString(group.Number);
-                CbSpesGroup.SelectedItem = _db.GetContext().Speciality.FirstOrDefault(p => p.ID == group.ID_Speciality);
-                TbGrYear.Text = group.SchollYear;
-                TbGrStud.Text = Convert.ToString(group.NumberOfStudents);
+                    Group group = _db.GetContext().Group.FirstOrDefault(p => p.ID == ((Group)CbGroupNumber.SelectedItem).ID);
+                    TbGrID.Text = Convert.ToString(group.ID);
+                    TbGrNumber.Text = Convert.ToString(group.Number);
+                    CbSpesGroup.SelectedItem = _db.GetContext().Speciality.FirstOrDefault(p => p.ID == group.ID_Speciality);
+                    TbGrYear.Text = group.SchollYear;
+                    TbGrStud.Text = Convert.ToString(group.NumberOfStudents);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
 
@@ -370,11 +308,18 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnDeleteTeacher_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
             Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
 
             _db.GetContext().Teacher.Remove(teacher);
             _db.GetContext().SaveChanges();
             RefreshTeacher();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
         }
         /// <summary>
         /// Редактирование данных о преподавателе
@@ -383,14 +328,21 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnEditTeacher_Click(object sender, RoutedEventArgs e)
         {
-            Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
-            teacher.Name = TbTeacherName.Text;
-            teacher.Education = TbTeacherEducation.Text;
-            teacher.Rate = Convert.ToDouble(TbTeacherStaffing.Text);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Успешно сохранено!");
-            RefreshTeacher();
-        }
+            try
+            {
+                Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
+                teacher.Name = TbTeacherName.Text;
+                teacher.Education = TbTeacherEducation.Text;
+                teacher.Rate = Convert.ToDouble(TbTeacherStaffing.Text);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Успешно сохранено!");
+                RefreshTeacher();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
         /// <summary>
         /// Изменение параметров в зависимости от Combobox
         /// </summary>
@@ -398,6 +350,8 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void CbTeacherName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
             if (CbTeacherName.SelectedItem != null)
             {
                 Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbTeacherName.SelectedItem).ID);
@@ -405,6 +359,12 @@ namespace FUN.Pages
                 TbTeacherName.Text = teacher.Name;
                 TbTeacherEducation.Text = teacher.Education;
                 TbTeacherStaffing.Text = Convert.ToString(teacher.Rate);
+            }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
         /// <summary>
@@ -414,15 +374,22 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void CbLoadID_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbLoadID.SelectedItem != null)
+            try
             {
-                LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadID.SelectedItem).ID);
-                TbLoadID.Text = Convert.ToString(loadGroup.ID);
-                CbLoadGroup.SelectedItem = _db.GetContext().Group.FirstOrDefault(p => p.ID == loadGroup.ID_Group);
-                CbLoadDiscipline.SelectedItem = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == loadGroup.ID_Discipline);
-                TbLoadLec.Text = Convert.ToString(loadGroup.Lections);
-                TbLoadPr.Text = Convert.ToString(loadGroup.Practice);
-                TbLoadLR.Text = Convert.ToString(loadGroup.LR);
+                if (CbLoadID.SelectedItem != null)
+                {
+                    LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadID.SelectedItem).ID);
+                    TbLoadID.Text = Convert.ToString(loadGroup.ID);
+                    CbLoadGroup.SelectedItem = _db.GetContext().Group.FirstOrDefault(p => p.ID == loadGroup.ID_Group);
+                    CbLoadDiscipline.SelectedItem = _db.GetContext().Discipline.FirstOrDefault(p => p.ID == loadGroup.ID_Discipline);
+                    TbLoadLec.Text = Convert.ToString(loadGroup.Lections);
+                    TbLoadPr.Text = Convert.ToString(loadGroup.Practice);
+                    TbLoadLR.Text = Convert.ToString(loadGroup.LR);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
 
@@ -444,10 +411,17 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnDeleteLoad_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
             LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadID.SelectedItem).ID);
             _db.GetContext().LoadGroup.Remove(loadGroup);
             _db.GetContext().SaveChanges();
             RefreshLoadGroup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
         }
         /// <summary>
         /// Сохранение нагрузки
@@ -456,13 +430,20 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnSaveLoad_Click(object sender, RoutedEventArgs e)
         {
-            LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadID.SelectedItem).ID);
-            loadGroup.ID_Discipline = ((Discipline)CbLoadDiscipline.SelectedItem).ID;
-            loadGroup.ID_Group = ((Group)CbLoadGroup.SelectedItem).ID;
-            loadGroup.GroupAndDis = ((Discipline)CbLoadDiscipline.SelectedItem).Name + " " + ((Group)CbLoadGroup.SelectedItem).Number;
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Успешно сохранено!");
-            RefreshLoadGroup();
+            try
+            {
+                LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadID.SelectedItem).ID);
+                loadGroup.ID_Discipline = ((Discipline)CbLoadDiscipline.SelectedItem).ID;
+                loadGroup.ID_Group = ((Group)CbLoadGroup.SelectedItem).ID;
+                loadGroup.GroupAndDis = ((Discipline)CbLoadDiscipline.SelectedItem).Name + " " + ((Group)CbLoadGroup.SelectedItem).Number;
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Успешно сохранено!");
+                RefreshLoadGroup();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
 
         }
 
@@ -478,17 +459,30 @@ namespace FUN.Pages
             RefreshAll();
         }
 
+        /// <summary>
+        /// Изменение параметров в зависимости от Combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CbLoadTeacherID_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            if (CbLoadTeacherID.SelectedItem != null)
+            try
             {
-                LoadTeacher loadTeacher = _db.GetContext().LoadTeacher.FirstOrDefault(p => p.ID == ((LoadTeacher)CbLoadTeacherID.SelectedItem).ID);
-                TbLoadTeacherId.Text = Convert.ToString(loadTeacher.ID);
-                CbLoadTeacherLoad.SelectedItem = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == loadTeacher.ID_Load);
-                CbLoadTeacherTeacher.SelectedItem = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == loadTeacher.ID_Teacher);
-                TbLoadTeacherLec.Text = Convert.ToString(loadTeacher.Lections);
-                TbLoadTeacherPrac.Text = Convert.ToString(loadTeacher.Practice);
-                TbLoadTeacherLR.Text = Convert.ToString(loadTeacher.LR);
+
+                if (CbLoadTeacherID.SelectedItem != null)
+                {
+                    LoadTeacher loadTeacher = _db.GetContext().LoadTeacher.FirstOrDefault(p => p.ID == ((LoadTeacher)CbLoadTeacherID.SelectedItem).ID);
+                    TbLoadTeacherId.Text = Convert.ToString(loadTeacher.ID);
+                    CbLoadTeacherLoad.SelectedItem = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == loadTeacher.ID_Load);
+                    CbLoadTeacherTeacher.SelectedItem = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == loadTeacher.ID_Teacher);
+                    TbLoadTeacherLec.Text = Convert.ToString(loadTeacher.Lections);
+                    TbLoadTeacherPrac.Text = Convert.ToString(loadTeacher.Practice);
+                    TbLoadTeacherLR.Text = Convert.ToString(loadTeacher.LR);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
         /// <summary>
@@ -498,32 +492,32 @@ namespace FUN.Pages
         /// <param name="e"></param>
         private void BtnDelLoadTeacher_Click(object sender, RoutedEventArgs e)
         {
-            LoadTeacher loadTeacher = _db.GetContext().LoadTeacher.FirstOrDefault(p => p.ID == ((LoadTeacher)CbLoadTeacherID.SelectedItem).ID);
-            _db.GetContext().LoadTeacher.Remove(loadTeacher);
-            _db.GetContext().SaveChanges();
-            RefreshLoadTeacher();
-        }
-
-        private void CbTeachersName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if(CbTeachersName.Text != null)
+            try
             {
-                AddClass();
+                LoadTeacher loadTeacher = _db.GetContext().LoadTeacher.FirstOrDefault(p => p.ID == ((LoadTeacher)CbLoadTeacherID.SelectedItem).ID);
+                _db.GetContext().LoadTeacher.Remove(loadTeacher);
+                _db.GetContext().SaveChanges();
+                RefreshLoadTeacher();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnCreateDoc_Click(object sender, RoutedEventArgs e)
         {
-
-            var options = new ExcelExportingOptions();
+            /*var options = new ExcelExportingOptions();
             options.ExportMode = ExportMode.Text;
             var excelEngine = Dg.ExportToExcel(Dg.View, options);
             var workBook = excelEngine.Excel.Workbooks[0];
-            workBook.SaveAs("Sample.xlsx");
-
-
+            workBook.SaveAs("Sample.xlsx");*/
         }
-
-
     }
 }

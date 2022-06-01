@@ -26,27 +26,38 @@ namespace FUN.Window
             RefreshGroup();
             RefreshCbDiscipline();
         }
-
+        /// <summary>
+        /// Добавление нагрузки для группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddLoad_Click(object sender, RoutedEventArgs e)
         {
-            int number = ((Group)CbLoadGroup.SelectedItem).NumberOfStudents;
-            LoadGroup load = new LoadGroup()
+            try
             {
-                ID_Discipline = ((Discipline)CbLoadDiscipline.SelectedItem).ID,
-                ID_Group = ((Group)CbLoadGroup.SelectedItem).ID,
-                Lections = Convert.ToInt32(TbLoadLec.Text),
-                Practice = Convert.ToInt32(TbLoadPr.Text),
-                LR = Convert.ToInt32(TbLoadLR.Text),
-                GroupAndDis = ((Discipline)CbLoadDiscipline.SelectedItem).Name + " " + ((Group)CbLoadGroup.SelectedItem).Number
-            };
-            if (number >= 25)
-            {
-                load.LR = 2 * load.LR;
+                int number = ((Group)CbLoadGroup.SelectedItem).NumberOfStudents;
+                LoadGroup load = new LoadGroup()
+                {
+                    ID_Discipline = ((Discipline)CbLoadDiscipline.SelectedItem).ID,
+                    ID_Group = ((Group)CbLoadGroup.SelectedItem).ID,
+                    Lections = Convert.ToInt32(TbLoadLec.Text),
+                    Practice = Convert.ToInt32(TbLoadPr.Text),
+                    LR = Convert.ToInt32(TbLoadLR.Text),
+                    GroupAndDis = ((Discipline)CbLoadDiscipline.SelectedItem).Name + " " + ((Group)CbLoadGroup.SelectedItem).Number
+                };
+                if (number >= 25)
+                {
+                    load.LR = 2 * load.LR;
+                }
+                _db.GetContext().LoadGroup.Add(load);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Вы успешно добавили нагрузку для группы!" + "\n" + "Теперь можете добавить нагрузку для преподавателя!");
             }
-            _db.GetContext().LoadGroup.Add(load);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили нагрузку для группы!" + "\n" + "Теперь можете добавить нагрузку для преподавателя!" );
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
 
 
         /// <summary>

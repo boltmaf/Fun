@@ -17,7 +17,6 @@ namespace FUN
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Group()
         {
-            this.Load = new HashSet<Load>();
             this.LoadGroup = new HashSet<LoadGroup>();
         }
     
@@ -28,8 +27,6 @@ namespace FUN
         public int NumberOfStudents { get; set; }
     
         public virtual Speciality Speciality { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Load> Load { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoadGroup> LoadGroup { get; set; }
     }

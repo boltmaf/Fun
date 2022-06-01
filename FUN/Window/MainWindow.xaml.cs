@@ -24,6 +24,7 @@ namespace FUN
         {
             InitializeComponent();
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            MainFrame.Navigate(new Pages.DataPage());
         }
 
         private void MainDate_Click(object sender, RoutedEventArgs e)

@@ -14,14 +14,15 @@ namespace FUN
         public Nullable<int> Lections { get; set; }
         public Nullable<int> Practice { get; set; }
         public Nullable<int> LR { get; set; }
-        /*public Loads(string Discipline, string Teachers, int Group, int Lections, int Practice, int LR )
-        {
-            this.Discipline = Discipline;
-            this.Teachers = Teachers;
-            this.Group = Group;
-            this.Lections = Lections;
-            this.Practice = Practice;
-            this.LR = LR;
-        }*/
     }
+
+    public partial class LoadsGroup
+    {
+        public int Group { get; set; }
+        public string Discipline { get; set; }
+        public Nullable<int> Lections { get; set; }
+        public Nullable<int> Practice { get; set; }
+        public Nullable<int> LR { get; set; }
+    }
+
 }

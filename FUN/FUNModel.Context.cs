@@ -28,16 +28,16 @@ namespace FUN
             return entities;
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
         public virtual DbSet<Discipline> Discipline { get; set; }
         public virtual DbSet<Group> Group { get; set; }
-        public virtual DbSet<Load_Teacher> Load_Teacher { get; set; }
         public virtual DbSet<Speciality> Speciality { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
-        public virtual DbSet<Teacher_Discipline> Teacher_Discipline { get; set; }
-        public virtual DbSet<Load> Load { get; set; }
-        public virtual DbSet<HourlyLoad> HourlyLoad { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<LoadGroup> LoadGroup { get; set; }
         public virtual DbSet<LoadTeacher> LoadTeacher { get; set; }
     }

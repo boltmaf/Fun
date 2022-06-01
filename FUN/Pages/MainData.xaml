@@ -10,36 +10,6 @@
       Title="MainData">
     <Grid>
         <TabControl FontFamily="Comic Sans Ms">
-            <TabItem Header="Специальности">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="9*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource FirstStyle}">Специальность</TextBlock>
-                    <UniformGrid Grid.Column="1" Columns="2" Grid.Row="0">
-                        <ComboBox IsReadOnly="false" x:Name="CbSpecCode" Grid.Row="0" Grid.Column="1" DisplayMemberPath="Code" Width="200" Height="30"></ComboBox>
-                        <Button x:Name="BtnAddSpec" Width="50" Height="30" Click="BtnAddDis_Click">+</Button>
-                    </UniformGrid>
-                    <UniformGrid Rows="3" Grid.Column="0" Grid.Row="1">
-                        <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Code</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Название</TextBlock>
-
-                    </UniformGrid>
-                    <UniformGrid Rows="3" Grid.Row="1" Grid.Column="1">
-                        <TextBox x:Name="TbSpecID" IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>
-                        <TextBox x:Name="TbSpecCode" Style="{StaticResource TbStyle}"></TextBox>
-                        <TextBox x:Name="TBSpecName" Style="{StaticResource TbStyle}"></TextBox>
-                    </UniformGrid>
-                    <Button x:Name="BtAddSpec" Grid.Row="3" Grid.Column="1" Click="BtAddSpec_Click">Добавить</Button>
-                </Grid>
-            </TabItem>
             <TabItem Header="Дисциплина">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -75,49 +45,6 @@
                     </UniformGrid>
                     <Button x:Name="BtnDeleteDis" Grid.Row="3" Style="{StaticResource BtnStyle}" Grid.Column="0" Click="BtnDeleteDis_Click">Удалить</Button>
                     <Button x:Name="BtnSaveDis" Style="{StaticResource BtnStyle}" Grid.Row="3" Grid.Column="1" Click="BtnSaveDis_Click">Сохранить</Button>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Нагрузка">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="9*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource FirstStyle}">Дисциплина</TextBlock>
-                    <ComboBox x:Name="CbDisLoad" IsReadOnly="false"  Grid.Row="0" Grid.Column="1" DisplayMemberPath="Name" Height="20" Width="200"></ComboBox>
-                    <UniformGrid Rows="11" Grid.Column="0" Grid.Row="1">
-                        <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Номер семестра</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Лекции</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Практики</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Лабораторные работы</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Курсовая работа</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Консультация</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Экзамен</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Зачет</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Итого</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Преподаватель</TextBlock>
-                    </UniformGrid>
-                    <UniformGrid Rows="11" Grid.Row="1" Grid.Column="1">
-                        <TextBox  IsReadOnly="True" Style="{StaticResource TbStyle}" Height="20"></TextBox>
-                        <TextBox x:Name="TbSemNumber" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbLection" Grid.Column="0"  Style="{StaticResource TbStyle}"   Height="20"></TextBox>
-                        <TextBox x:Name="TbPractice" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbLR" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbCR" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbConsult" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbExam" Grid.Column="0"  Style="{StaticResource TbStyle}"   Height="20"></TextBox>
-                        <TextBox x:Name="TbOffset" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <TextBox x:Name="TbSumm" IsReadOnly="True" Grid.Column="0"  Style="{StaticResource TbStyle}"  Height="20"></TextBox>
-                        <ComboBox x:Name="CbTeacherLoad" Grid.Row="0" Grid.Column="1" Width="200" Height="20" DisplayMemberPath="Name"></ComboBox>
-                    </UniformGrid>
-                    <Button x:Name="BtRefreshSumm" Grid.Row="3" Grid.Column="0" Width="200" Height="30" Click="BtRefreshSumm_Click">Обновить сумму</Button>
-                    <Button x:Name="BtAddLoad" Grid.Row="3" Grid.Column="1" Click="BtAddLoad_Click" Width="200" Height="30">Добавить</Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Группы">
@@ -199,8 +126,8 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="0.15*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource FirstStyle}">ID нагрузки</TextBlock>
-                    <ComboBox x:Name="CbLoadID" IsReadOnly="false"  Grid.Row="0" Grid.Column="1" DisplayMemberPath="ID" Style="{StaticResource CbStyle}" SelectionChanged="CbLoadID_SelectionChanged"></ComboBox>
+                    <TextBlock Style="{StaticResource FirstStyle}">Группа и дисциплина</TextBlock>
+                    <ComboBox x:Name="CbLoadID" IsReadOnly="false"  Grid.Row="0" Grid.Column="1" DisplayMemberPath="GroupAndDis" Style="{StaticResource CbStyle}" SelectionChanged="CbLoadID_SelectionChanged"></ComboBox>
                     <Button x:Name="BtnAddLoad" Width="50" Height="30" Grid.Column="2" Style="{StaticResource BtnStyle}" Click="BtnAddLoad_Click">+</Button>
                     <UniformGrid Rows="6" Grid.Column="0" Grid.Row="1">
                         <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
@@ -234,8 +161,8 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition Width="0.15*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Style="{StaticResource FirstStyle}">ID нагрузки</TextBlock>
-                    <ComboBox x:Name="CbLoadTeacherID" IsReadOnly="false"  Grid.Row="0" Grid.Column="1" DisplayMemberPath="ID" Style="{StaticResource CbStyle}" SelectionChanged="CbLoadTeacherID_SelectionChanged_1"></ComboBox>
+                    <TextBlock Style="{StaticResource FirstStyle}">Преподаватель, дисциплина, группа</TextBlock>
+                    <ComboBox x:Name="CbLoadTeacherID" IsReadOnly="false"  Grid.Row="0" Grid.Column="1" DisplayMemberPath="TeacherDisGroup" Style="{StaticResource CbStyle}" SelectionChanged="CbLoadTeacherID_SelectionChanged_1"></ComboBox>
                     <Button x:Name="BtnAddLoadTeacher" Width="50" Grid.Column="2" Height="30" Style="{StaticResource BtnStyle}" Click="BtnAddLoadTeacher_Click">+</Button>
                     <UniformGrid Rows="6" Grid.Column="0" Grid.Row="1">
                         <TextBlock Style="{StaticResource FirstStyle}">ID</TextBlock>
@@ -275,37 +202,6 @@
                     </UniformGrid>
                     <Button x:Name="BtnDelLoadTeacher" Grid.Row="3" Grid.Column="0" Style="{StaticResource BtnStyle}" Click="BtnDelLoadTeacher_Click" >Удалить</Button>
                     <Button x:Name="BtnSaveLoadTeacher" Grid.Row="3" Grid.Column="1" Style="{StaticResource BtnStyle}" Click="BtnSaveLoad_Click">Сохранить</Button>
-                </Grid>
-            </TabItem>
-            <TabItem>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <UniformGrid Rows="2">
-                        <ListView Name="LoadTeacherList">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn x:Name="GVCTeachers" DisplayMemberBinding="{Binding Path=Teachers}" Width="100">Преподаватель</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Discipline}" Width="130">Дисциплина и группа</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Group}" Width="50">Группа</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Lections}" Width="50">Лекции</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Practice}" Width="50">Практики</GridViewColumn>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=LR}" Width="130">Лабораторные работы</GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <syncfusion:SfDataGrid x:Name="Dg">
-
-                        </syncfusion:SfDataGrid>
-                    </UniformGrid>
-                    
-                    <UniformGrid Rows="2" Grid.Column="2">
-                        <ComboBox Grid.Column="1" x:Name="CbTeachersName" Width="250" Height="50" DisplayMemberPath="Name" SelectionChanged="CbTeachersName_SelectionChanged"></ComboBox>
-                        <Button x:Name="BtnCreateDoc" Width="200" Height="50" Click="BtnCreateDoc_Click"></Button>
-                    </UniformGrid>
-                    
                 </Grid>
             </TabItem>
         </TabControl>

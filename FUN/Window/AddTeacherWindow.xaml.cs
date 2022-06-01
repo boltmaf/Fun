@@ -25,15 +25,29 @@ namespace FUN.Window
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Добавление преподавателя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtAddTeacher_Click(object sender, RoutedEventArgs e)
         {
-            Teacher teacher = new Teacher() { 
-                Name = TbTeacherName.Text, 
-                Education = TbTeacherEducation.Text,
-                Rate = Convert.ToDouble(TbTeacherStaffing.Text) };
-            _db.GetContext().Teacher.Add(teacher);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили преподавателя!");
-        }
+            try
+            {
+                Teacher teacher = new Teacher()
+                {
+                    Name = TbTeacherName.Text,
+                    Education = TbTeacherEducation.Text,
+                    Rate = Convert.ToDouble(TbTeacherStaffing.Text)
+                };
+                _db.GetContext().Teacher.Add(teacher);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Вы успешно добавили преподавателя!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
     }
 }

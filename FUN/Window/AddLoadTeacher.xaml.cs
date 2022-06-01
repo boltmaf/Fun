@@ -45,31 +45,43 @@ namespace FUN.Window
                 CbLoadTeacherLoad.Items.Add(load);
             }
         }
-
+        /// <summary>
+        /// Добавление нагрузки для преподавателя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddLoadTeacher_Click(object sender, RoutedEventArgs e)
         {
-            LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID);
-            LoadTeacher load = new LoadTeacher();
-            load.ID_Load = ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID;
-            load.ID_Teacher = ((Teacher)CbLoadTeacherTeacher.SelectedItem).ID;
-            if (ChBoxLections.IsChecked == true)
+            try
             {
-                loadGroup.Lections = 0;
-                load.Lections = Convert.ToInt32(TbLoadTeacherLec.Text);
+                LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID);
+                LoadTeacher load = new LoadTeacher();
+                load.ID_Load = ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID;
+                load.ID_Teacher = ((Teacher)CbLoadTeacherTeacher.SelectedItem).ID;
+                load.TeacherDisGroup = ((Teacher)CbLoadTeacherTeacher.SelectedItem).Name + "/" + loadGroup.Discipline.Name + "/" + Convert.ToString(loadGroup.Group.Number);
+                if (ChBoxLections.IsChecked == true)
+                {
+                    loadGroup.Lections = 0;
+                    load.Lections = Convert.ToInt32(TbLoadTeacherLec.Text);
+                }
+                if (ChBoxPractice.IsChecked == true)
+                {
+                    loadGroup.Practice = 0;
+                    load.Practice = Convert.ToInt32(TbLoadTeacherPrac.Text);
+                }
+                if (ChBoxLR.IsChecked == true)
+                {
+                    loadGroup.LR = 0;
+                    load.LR = Convert.ToInt32(TbLoadTeacherLR.Text);
+                }
+                _db.GetContext().LoadTeacher.Add(load);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Вы успешно добавили нагрузку для преподавателя!");
             }
-            if (ChBoxPractice.IsChecked == true)
+            catch (Exception ex)
             {
-                loadGroup.Practice = 0;
-                load.Practice = Convert.ToInt32(TbLoadTeacherPrac.Text);
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
-            if (ChBoxLR.IsChecked == true)
-            {
-                loadGroup.LR = 0;
-                load.LR = Convert.ToInt32(TbLoadTeacherLR.Text);
-            }
-            _db.GetContext().LoadTeacher.Add(load);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили нагрузку для преподавателя!");
         }
 
         private void CbLoadTeacherLoad_SelectionChanged(object sender, SelectionChangedEventArgs e)

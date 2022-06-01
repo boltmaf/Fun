@@ -7,21 +7,59 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataPage">
+    <TabControl>
+        <TabItem Header="Нагрузка для преподавателя">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid IsReadOnly="True" x:Name="DgLoadTeachers" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=Teachers}" Header="Преподаватель"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Discipline}"  Header="Дисциплина"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Group}"  Header="Группа"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Lections}"  Header="Лекции"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Practice}"  Header="Практики"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=LR}"  Header="Лабораторные работы"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <DataGrid x:Name="DgLoad" Grid.Column="0" AutoGenerateColumns="True">
+                <UniformGrid Rows="6" Grid.Column="2">
+                    <TextBlock Style="{StaticResource FirstStyle}">Выберите преподавателя</TextBlock>
+                    <ComboBox Grid.Column="1" x:Name="CbTeachersName" DisplayMemberPath="Name" Style="{StaticResource CbStyle}" SelectionChanged="CbTeachersName_SelectionChanged"></ComboBox>
+                    <TextBlock Style="{StaticResource FirstStyle}">Суммарная нагрузка:</TextBlock>
+                    <TextBlock x:Name="TbSummLoad" Style="{StaticResource FirstStyle}"></TextBlock>
+                    <Button x:Name="BtnCreateDoc" Style="{StaticResource BtnStyle}" Click="BtnCreateDoc_Click" >Сформировать документ</Button>
+                </UniformGrid>
+            </Grid>
+        </TabItem>
 
-        </DataGrid>
-        <UniformGrid Rows="4" Grid.Column="1">
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="TimesNewRoman" FontSize="18" Margin="136,102,136,0">Преподаватель</TextBlock>
-            <ComboBox x:Name="CbTeacherLoad" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="TimesNewRoman" FontSize="18" SelectionChanged="CbTeacherLoad_SelectionChanged" Width="200" Height="50" DisplayMemberPath="Name"></ComboBox>
-            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="TimesNewRoman" FontSize="18" Margin="136,102,136,0">Дисциплина</TextBlock>
-            <ComboBox x:Name="CbDisciplineLoad" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="TimesNewRoman" FontSize="18" SelectionChanged="CbDisciplineLoad_SelectionChanged"  Width="200" Height="50" DisplayMemberPath="Name"></ComboBox>
-        </UniformGrid>
+        <TabItem Header="Нагрузка для группы">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid IsReadOnly="True" x:Name="DgLoadGroup" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=Group}"  Header="Группа"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Discipline}"  Header="Дисциплина"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Teachers}"  Header="Преподаватель"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Lections}"  Header="Лекции"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Practice}"  Header="Практики"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=LR}"  Header="Лабораторные работы"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-    </Grid>
+                <UniformGrid Rows="6" Grid.Column="2">
+                    <TextBlock Style="{StaticResource FirstStyle}">Выберите группу</TextBlock>
+                    <ComboBox Grid.Column="1" x:Name="CbLoadGroupNumber" DisplayMemberPath="Number" Style="{StaticResource CbStyle}" SelectionChanged="CbLoadGroupNumber_SelectionChanged"></ComboBox>
+                    <TextBlock Style="{StaticResource FirstStyle}">Суммарная нагрузка:</TextBlock>
+                    <TextBlock x:Name="TbGroupSummLoad" Style="{StaticResource FirstStyle}"></TextBlock>
+                    <Button x:Name="BtnCreateGroupDoc" Style="{StaticResource BtnStyle}" Click="BtnCreateGroupDoc_Click">Сформировать документ</Button>
+                </UniformGrid>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Page>

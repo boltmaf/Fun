@@ -101,9 +101,6 @@
     <Compile Include="LoadTeacher.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Users.cs">
-      <DependentUpon>FUNModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Window\AddDisciplineWindow.xaml.cs">
       <DependentUpon>AddDisciplineWindow.xaml</DependentUpon>
     </Compile>
@@ -121,15 +118,6 @@
     <Compile Include="Group.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HourlyLoad.cs">
-      <DependentUpon>FUNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Load.cs">
-      <DependentUpon>FUNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Load_Teacher.cs">
-      <DependentUpon>FUNModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pages\DataPage.xaml.cs">
       <DependentUpon>DataPage.xaml</DependentUpon>
     </Compile>
@@ -140,9 +128,6 @@
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Teacher.cs">
-      <DependentUpon>FUNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Teacher_Discipline.cs">
       <DependentUpon>FUNModel.tt</DependentUpon>
     </Compile>
     <Page Include="Window\AddDisciplineWindow.xaml">

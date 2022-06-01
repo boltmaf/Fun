@@ -20,6 +20,7 @@ namespace FUN
         public Nullable<int> Lections { get; set; }
         public Nullable<int> Practice { get; set; }
         public Nullable<int> LR { get; set; }
+        public string TeacherDisGroup { get; set; }
     
         public virtual LoadGroup LoadGroup { get; set; }
         public virtual Teacher Teacher { get; set; }

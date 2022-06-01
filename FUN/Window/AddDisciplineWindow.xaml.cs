@@ -27,28 +27,39 @@ namespace FUN.Window
             InitializeComponent();
             RefreshCbSpezialization();
         }
-
+        /// <summary>
+        /// Добавление дисциплины
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnAddDis_Click(object sender, RoutedEventArgs e)
         {
-            if (TbDisLec.Text == "")
-                TbDisLec.Text = "0";
-            if (TbDisPrac.Text == "")
-                TbDisPrac.Text = "0";
-            if (TbDisLr.Text == "")
-                TbDisLr.Text = "0";
-            Discipline discipline = new Discipline()
+            try
             {
-                Name = TbDisName.Text,
-                ID_Speciality = ((Speciality)CbSpecDisciplineCode.SelectedItem).ID,
-                Lections = Convert.ToInt32(TbDisLec.Text),
-                Practice = Convert.ToInt32(TbDisPrac.Text),
-                Laboratory = Convert.ToInt32(TbDisLr.Text),
-                Year = Convert.ToInt32(TbDisYear.Text)
-            };
-            _db.GetContext().Discipline.Add(discipline);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили дисциплину!");
-        }
+                if (TbDisLec.Text == "")
+                    TbDisLec.Text = "0";
+                if (TbDisPrac.Text == "")
+                    TbDisPrac.Text = "0";
+                if (TbDisLr.Text == "")
+                    TbDisLr.Text = "0";
+                Discipline discipline = new Discipline()
+                {
+                    Name = TbDisName.Text,
+                    ID_Speciality = ((Speciality)CbSpecDisciplineCode.SelectedItem).ID,
+                    Lections = Convert.ToInt32(TbDisLec.Text),
+                    Practice = Convert.ToInt32(TbDisPrac.Text),
+                    Laboratory = Convert.ToInt32(TbDisLr.Text),
+                    Year = Convert.ToInt32(TbDisYear.Text)
+                };
+                _db.GetContext().Discipline.Add(discipline);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Вы успешно добавили дисциплину!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
         private void RefreshCbSpezialization()
         {
             CbSpecDisciplineCode.Items.Clear();

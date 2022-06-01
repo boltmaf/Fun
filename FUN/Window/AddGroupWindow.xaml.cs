@@ -34,17 +34,30 @@ namespace FUN.Window
                 CbSpesGroup.Items.Add(u);
             }
         }
-
+        /// <summary>
+        /// Добавление группы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtAddGroup_Click(object sender, RoutedEventArgs e)
         {
-            Group group = new Group() { 
-                Number = Convert.ToInt32(TbGrNumber.Text), 
-                ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID, 
-                SchollYear = TbGrYear.Text, 
-                NumberOfStudents = Convert.ToInt32(TbGrStud.Text) };
-            _db.GetContext().Group.Add(group);
-            _db.GetContext().SaveChanges();
-            MessageBox.Show("Вы успешно добавили группу!");
-        }
+            try
+            {
+                Group group = new Group()
+                {
+                    Number = Convert.ToInt32(TbGrNumber.Text),
+                    ID_Speciality = ((Speciality)CbSpesGroup.SelectedItem).ID,
+                    SchollYear = TbGrYear.Text,
+                    NumberOfStudents = Convert.ToInt32(TbGrStud.Text)
+                };
+                _db.GetContext().Group.Add(group);
+                _db.GetContext().SaveChanges();
+                MessageBox.Show("Вы успешно добавили группу!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+            }
+}
     }
 }
