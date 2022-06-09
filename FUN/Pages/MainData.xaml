@@ -32,7 +32,7 @@
                         <TextBlock Style="{StaticResource FirstStyle}">Лекции</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Практические работы</TextBlock>
                         <TextBlock Style="{StaticResource FirstStyle}">Лабораторные работы</TextBlock>
-                        <TextBlock Style="{StaticResource FirstStyle}">Год поступления</TextBlock>
+                        <TextBlock Style="{StaticResource FirstStyle}">Номер семестра</TextBlock>
                     </UniformGrid>
                     <UniformGrid Rows="7" Grid.Row="1" Grid.Column="1">
                         <TextBox x:Name="TbDisID"  IsReadOnly="True" Style="{StaticResource TbStyle}"></TextBox>

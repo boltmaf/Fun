@@ -61,5 +61,61 @@
                 </UniformGrid>
             </Grid>
         </TabItem>
+        <TabItem Header="Преподаватели">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid IsReadOnly="True" x:Name="DgTeachers" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Name}"  Header="Наименование"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Education}"  Header="Образование"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Rate}"  Header="Ставка"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Column="1" x:Name="BtnCreateTeachersDoc" Style="{StaticResource BtnStyle}" Click="BtnCreateTeachersDoc_Click">Сформировать документ</Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Группы">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid IsReadOnly="True" x:Name="DgGroups" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=ID_Speciality}"  Header="ID специальности"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Number}"  Header="Номер"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=SchoolYear}"  Header="Год"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=NumberOfStudents}"  Header="Количество студентов"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Column="1" x:Name="BtnCreateGroupsDoc" Style="{StaticResource BtnStyle}" Click="BtnCreateGroupsDoc_Click">Сформировать документ</Button>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Дисциплины">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <DataGrid IsReadOnly="True" x:Name="DgDisciplines" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Path=ID}"  Header="ID"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Name}"  Header="Наименование"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=ID_Speciality}"  Header="ID специальности"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Lections}"  Header="Лекции"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Practice}"  Header="ПР"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Laboratory}"  Header="ЛР"></DataGridTextColumn>
+                        <DataGridTextColumn Binding="{Binding Path=Year}"  Header="Семестр"></DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button Grid.Column="1" x:Name="BtnCreateDisciplineDoc" Style="{StaticResource BtnStyle}" Click="BtnCreateDisciplineDoc_Click">Сформировать документ</Button>
+            </Grid>
+        </TabItem>
+        
     </TabControl>
 </Page>

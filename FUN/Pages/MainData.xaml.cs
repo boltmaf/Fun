@@ -478,6 +478,7 @@ namespace FUN.Pages
                     TbLoadTeacherLec.Text = Convert.ToString(loadTeacher.Lections);
                     TbLoadTeacherPrac.Text = Convert.ToString(loadTeacher.Practice);
                     TbLoadTeacherLR.Text = Convert.ToString(loadTeacher.LR);
+
                 }
             }
             catch (Exception ex)

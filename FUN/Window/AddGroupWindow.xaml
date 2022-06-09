@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FUN.Window"
         mc:Ignorable="d"
-        Title="AddGroupWindow" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
+        Title="Добавление групп" Height="800" Width="1200" MinHeight="800" MinWidth="1200">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>

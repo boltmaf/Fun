@@ -30,6 +30,9 @@ namespace FUN.Pages
             InitializeComponent();
             RefreshTeacher();
             RefreshGroup();
+            Teachers();
+            Discipline();
+            Groups();
         }
 
         private void RefreshTeacher()
@@ -50,7 +53,20 @@ namespace FUN.Pages
                 CbLoadGroupNumber.Items.Add(t);
             }
         }
+        private void Teachers()
+        {
+            DgTeachers.ItemsSource = _db.GetContext().Teacher.ToList();
+        }
 
+        private void Groups()
+        {
+            DgGroups.ItemsSource = _db.GetContext().Group.ToList();
+        }
+
+        private void Discipline()
+        {
+            DgDisciplines.ItemsSource = _db.GetContext().Discipline.ToList();
+        }
         private void LoadTeacher()
         {
             summ = 0;
@@ -174,6 +190,81 @@ namespace FUN.Pages
                 for (int j = 0; j < DgLoadGroup.Items.Count; j++)
                 {
                     TextBlock b = DgLoadGroup.Columns[i].GetCellContent(DgLoadGroup.Items[j]) as TextBlock;
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+                }
+            }
+        }
+
+        private void BtnCreateTeachersDoc_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application excel = new Excel.Application();
+            excel.Visible = true;
+            Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < DgTeachers.Columns.Count; j++)
+            {
+                Range myRange = (Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].Font.Bold = true;
+                sheet1.Columns[j + 1].ColumnWidth = 15;
+                myRange.Value2 = DgTeachers.Columns[j].Header;
+            }
+            for (int i = 0; i < DgTeachers.Columns.Count; i++)
+            {
+                for (int j = 0; j < DgTeachers.Items.Count; j++)
+                {
+                    TextBlock b = DgTeachers.Columns[i].GetCellContent(DgTeachers.Items[j]) as TextBlock;
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+                }
+            }
+        }
+
+        private void BtnCreateGroupsDoc_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application excel = new Excel.Application();
+            excel.Visible = true;
+            Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < DgGroups.Columns.Count; j++)
+            {
+                Range myRange = (Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].Font.Bold = true;
+                sheet1.Columns[j + 1].ColumnWidth = 15;
+                myRange.Value2 = DgGroups.Columns[j].Header;
+            }
+            for (int i = 0; i < DgGroups.Columns.Count; i++)
+            {
+                for (int j = 0; j < DgGroups.Items.Count; j++)
+                {
+                    TextBlock b = DgGroups.Columns[i].GetCellContent(DgGroups.Items[j]) as TextBlock;
+                    Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
+                    myRange.Value2 = b.Text;
+                }
+            }
+        }
+
+        private void BtnCreateDisciplineDoc_Click(object sender, RoutedEventArgs e)
+        {
+            Excel.Application excel = new Excel.Application();
+            excel.Visible = true;
+            Workbook workbook = excel.Workbooks.Add(System.Reflection.Missing.Value);
+            Worksheet sheet1 = (Worksheet)workbook.Sheets[1];
+
+            for (int j = 0; j < DgDisciplines.Columns.Count; j++)
+            {
+                Range myRange = (Range)sheet1.Cells[1, j + 1];
+                sheet1.Cells[1, j + 1].Font.Bold = true;
+                sheet1.Columns[j + 1].ColumnWidth = 15;
+                myRange.Value2 = DgDisciplines.Columns[j].Header;
+            }
+            for (int i = 0; i < DgDisciplines.Columns.Count; i++)
+            {
+                for (int j = 0; j < DgDisciplines.Items.Count; j++)
+                {
+                    TextBlock b = DgDisciplines.Columns[i].GetCellContent(DgDisciplines.Items[j]) as TextBlock;
                     Microsoft.Office.Interop.Excel.Range myRange = (Microsoft.Office.Interop.Excel.Range)sheet1.Cells[j + 2, i + 1];
                     myRange.Value2 = b.Text;
                 }

@@ -54,6 +54,7 @@ namespace FUN.Window
         {
             try
             {
+                int i = 0;
                 LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID);
                 LoadTeacher load = new LoadTeacher();
                 load.ID_Load = ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID;
@@ -86,12 +87,21 @@ namespace FUN.Window
 
         private void CbLoadTeacherLoad_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ChBoxLections.Visibility = Visibility.Visible;
+            ChBoxPractice.Visibility = Visibility.Visible;
+            ChBoxLR.Visibility = Visibility.Visible;
             if (CbLoadTeacherLoad.SelectedItem != null)
             {
                 LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID);
                 TbLoadTeacherLec.Text = Convert.ToString(loadGroup.Lections);
+                if (TbLoadTeacherLec.Text == "0")
+                    ChBoxLections.Visibility = Visibility.Hidden;
                 TbLoadTeacherPrac.Text = Convert.ToString(loadGroup.Practice);
+                if (TbLoadTeacherPrac.Text == "0")
+                    ChBoxPractice.Visibility = Visibility.Hidden;
                 TbLoadTeacherLR.Text = Convert.ToString(loadGroup.LR);
+                if (TbLoadTeacherLR.Text == "0")
+                    ChBoxLR.Visibility = Visibility.Hidden;
             }
         }
     }
