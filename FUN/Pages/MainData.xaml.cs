@@ -423,6 +423,7 @@ namespace FUN.Pages
                 MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
             }
         }
+        ///
         /// <summary>
         /// Сохранение нагрузки
         /// </summary>
