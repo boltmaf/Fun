@@ -27,6 +27,11 @@ namespace FUN
                 entities = new DBModel();
             return entities;
         }
+        public static DBModel NewContext()
+        {
+            entities = new DBModel();
+            return entities;
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

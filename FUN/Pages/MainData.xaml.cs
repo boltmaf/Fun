@@ -206,6 +206,7 @@ namespace FUN.Pages
             catch (Exception ex)
             {
                 MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+                _db.NewContext();
             }
         }
         /// <summary>
@@ -236,6 +237,7 @@ namespace FUN.Pages
             catch (Exception ex)
             {
                 MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+                _db.NewContext();
             }
 }
 
@@ -318,6 +320,7 @@ namespace FUN.Pages
             catch (Exception ex)
             {
                 MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+                _db.NewContext();
             }
         }
         /// <summary>
@@ -420,6 +423,7 @@ namespace FUN.Pages
             catch (Exception ex)
             {
                 MessageBox.Show("Возникла ошибка!" + "\n" + ex.Message);
+                _db.NewContext();
             }
         }
         ///
