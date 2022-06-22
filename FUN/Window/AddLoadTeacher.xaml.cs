@@ -16,6 +16,7 @@ using _db = FUN.DBModel;
 
 namespace FUN.Window
 {
+ 
     /// <summary>
     /// Логика взаимодействия для AddLoadTeacher.xaml
     /// </summary>
@@ -52,9 +53,12 @@ namespace FUN.Window
         /// <param name="e"></param>
         private void BtnAddLoadTeacher_Click(object sender, RoutedEventArgs e)
         {
+
+            int summ;
             try
             {
-                int i = 0;
+                int summ1 = 0;
+                summ = 0;
                 LoadGroup loadGroup = _db.GetContext().LoadGroup.FirstOrDefault(p => p.ID == ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID);
                 LoadTeacher load = new LoadTeacher();
                 load.ID_Load = ((LoadGroup)CbLoadTeacherLoad.SelectedItem).ID;
@@ -64,20 +68,59 @@ namespace FUN.Window
                 {
                     loadGroup.Lections = 0;
                     load.Lections = Convert.ToInt32(TbLoadTeacherLec.Text);
+                    summ1 += Convert.ToInt32(load.Lections);
                 }
                 if (ChBoxPractice.IsChecked == true)
                 {
                     loadGroup.Practice = 0;
                     load.Practice = Convert.ToInt32(TbLoadTeacherPrac.Text);
+                    summ1 += Convert.ToInt32(load.Practice);
                 }
                 if (ChBoxLR.IsChecked == true)
                 {
                     loadGroup.LR = 0;
                     load.LR = Convert.ToInt32(TbLoadTeacherLR.Text);
+                    summ1 += Convert.ToInt32(load.LR);
                 }
                 _db.GetContext().LoadTeacher.Add(load);
                 _db.GetContext().SaveChanges();
-                MessageBox.Show("Вы успешно добавили нагрузку для преподавателя!");
+
+                Teacher teacher = _db.GetContext().Teacher.FirstOrDefault(p => p.ID == ((Teacher)CbLoadTeacherTeacher.SelectedItem).ID);
+                List<LoadTeacher> loadTeacher = new List<LoadTeacher>();
+                List<Loads> loads = new List<Loads>();
+                foreach (LoadTeacher u in _db.GetContext().LoadTeacher)
+                {
+                    if (u.ID_Teacher == teacher.ID)
+                    {
+                        loadTeacher.Add(u);
+
+                    }
+                }
+                for (int i = 0; i < loadTeacher.Count; i++)
+                {
+                    loads.Add(new Loads()
+                    {
+                        Discipline = loadTeacher[i].LoadGroup.Discipline.Name,
+                        Teachers = loadTeacher[i].Teacher.Name,
+                        Group = loadTeacher[i].LoadGroup.Group.Number,
+                        Lections = loadTeacher[i].Lections,
+                        Practice = loadTeacher[i].Practice,
+                        LR = loadTeacher[i].LR
+                    });
+                    summ += Convert.ToInt32(loads[i].Lections) + Convert.ToInt32(loads[i].LR) + Convert.ToInt32(loads[i].Practice);
+                }
+                if (summ <= (teacher.Rate * 720))
+                {
+                    MessageBox.Show("Вы успешно добавили нагрузку для преподавателя!");
+                }
+                else
+                {
+                    summ -= Convert.ToInt32(load.Lections) + Convert.ToInt32(load.LR) + Convert.ToInt32(load.Practice);
+                    _db.GetContext().LoadTeacher.Remove(load);
+                    _db.GetContext().SaveChanges();
+                    MessageBox.Show("Ошибка! Превышена доступная нагрузка для преподавателя" + "\n" + "Количество доступных часов " + (teacher.Rate * 720-summ));
+                }
+
             }
             catch (Exception ex)
             {

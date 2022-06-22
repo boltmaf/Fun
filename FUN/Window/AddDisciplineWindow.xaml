@@ -21,7 +21,7 @@
             <TextBlock Style="{StaticResource FirstStyle}">Лекции</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Практические работы</TextBlock>
             <TextBlock Style="{StaticResource FirstStyle}">Лабораторные работы</TextBlock>
-            <TextBlock Style="{StaticResource FirstStyle}">Год поступления</TextBlock>
+            <TextBlock Style="{StaticResource FirstStyle}">Номер семестра</TextBlock>
         </UniformGrid>
         <UniformGrid Rows="6" Grid.Row="0" Grid.Column="1">
             <TextBox x:Name="TbDisName" Style="{StaticResource TbStyle}"></TextBox>
